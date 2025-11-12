@@ -5,8 +5,9 @@
     ./user.nix
     ./options/boot.nix
     ./options/nvidia.nix
-    ./options/stylix.nix
     ./options/pipewire.nix
+    ./options/stylix.nix
+    ./options/gdm.nix
     ./options/hyprland.nix
     ./options/waybar.nix
     ./options/rofi.nix
@@ -21,22 +22,32 @@
 
   time.timeZone = "America/Chicago";
 
-  # xdg.mime.defaultApplications = {
-  #   "inode/directory" = [ "dolphin.desktop" ];
-  # };
-
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.defaultSession = "hyprland";
+  home-manager.users.helehex = {
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config.common = {
+        default = [ "gtk" ];
+        "org.freedesktop.portal.FileChooser" = "gtk";
+      };
+    };
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "thunar.desktop";
+      };
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
+
+  programs.thunar.enable = true;
   programs.steam.enable = true;
   programs.nix-ld.enable = true;
-  services.udisks2.enable = true;
-
   environment.systemPackages = with pkgs; [
-    kdePackages.dolphin
-
     brave
     audacity
     blender
@@ -48,6 +59,8 @@
     easyeffects
     discord
   ];
+
+  services.udisks2.enable = true;
 
   environment.variables = {
     EDITOR = "zeditor";

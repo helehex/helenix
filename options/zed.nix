@@ -1,13 +1,17 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    zed-editor
+    gcc
+    rustc
+    rustup
     nil
     nixd
     pixi
   ];
 
   home-manager.users.helehex = {
-    programs.zed-editor.enable = true;
+    programs.zed-editor = {
+      enable = true;
+    };
   };
 }
