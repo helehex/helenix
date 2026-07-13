@@ -1,0 +1,37 @@
+// https://man.archlinux.org/man/extra/waybar/waybar-hyprland-workspaces.5.en
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["cpu", "clock"],
+    "hyprland/workspaces": {
+      "sort-by": "id",
+
+      // "format": "{icon}{windows}",
+      // "format-window-separator": "",
+      // "window-rewrite-default": "",
+      // "window-rewrite": {
+      //   "steam": " ",
+      //   "brave": " ",
+      //   "easyeffects": " ",
+      //   "discord": " ",
+      // },
+      // "format-icons": {
+      //   "active": "󰫈",
+      //   "default": "󰋙",
+      // },
+
+      "format": "{icon}",
+      "format-icons": {
+        "default": "󰋙",
+        "active": "󰫈",
+        "steam": "",
+        "brave": "",
+        "audio": "",
+        "discord": "",
+      },
+    },
+  },
+]

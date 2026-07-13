@@ -1,21 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
-  imports = [
-    ./hardware.nix
-    ./user.nix
-    ./options/boot.nix
-    ./options/nvidia.nix
-    ./options/pipewire.nix
-    ./options/stylix.nix
-    ./options/gdm.nix
-    ./options/hyprland.nix
-    ./options/waybar.nix
-    ./options/rofi.nix
-    ./options/bash.nix
-    ./options/alacritty.nix
-    ./options/git.nix
-    ./options/zed.nix
-  ];
+  imports = lib.filter (
+    n: lib.strings.hasPrefix "_" (baseNameOf n) && lib.strings.hasSuffix ".nix" n
+  ) (lib.filesystem.listFilesRecursive ./modules);
 
   networking.hostName = "aigis";
   networking.networkmanager.enable = true;
@@ -44,9 +31,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.nix-ld = {
+    enable = true;
+  };
+
   programs.thunar.enable = true;
   programs.steam.enable = true;
-  programs.nix-ld.enable = true;
+  programs.obs-studio.enable = true;
   environment.systemPackages = with pkgs; [
     brave
     audacity
@@ -55,17 +46,15 @@
     inkscape
     godot
     freecad-wayland
-    hyprshot
     easyeffects
     discord
+    prismlauncher
   ];
 
-  services.udisks2.enable = true;
-
-  environment.variables = {
-    EDITOR = "zeditor";
-    VISUAL = "zeditor";
-  };
+  # services.udisks2.enable = true;
+  # home-manager.users.helehex = {
+  #   services.udiskie.enable = true;
+  # };
 
   nix.settings = {
     # auto-optimise-store = true;

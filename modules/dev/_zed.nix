@@ -1,12 +1,17 @@
 { pkgs, ... }:
 {
+  environment.variables = {
+    EDITOR = "zeditor";
+    VISUAL = "zeditor";
+  };
+
   environment.systemPackages = with pkgs; [
     gcc
-    rustc
-    rustup
     nil
     nixd
     pixi
+    lua
+    lean
   ];
 
   home-manager.users.helehex = {

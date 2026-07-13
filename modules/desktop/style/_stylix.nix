@@ -2,8 +2,8 @@
 {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-    image = ./../wallpapers/wallpaper.png;
+    base16Scheme = ./theme.yaml;
+    image = null;
     polarity = "dark";
 
     cursor = {
@@ -23,9 +23,14 @@
         name = "GeistMono Nerd Font";
       };
       emoji = config.stylix.fonts.monospace;
+      sizes = {
+        applications = 10;
+      };
     };
   };
 
+  # # TODO: should be unecessary
   # home-manager.users.helehex = {
+  #   home.pointerCursor.enable = true;
   # };
 }
