@@ -47,7 +47,6 @@
     godot
     freecad-wayland
     easyeffects
-    discord
     prismlauncher
   ];
 

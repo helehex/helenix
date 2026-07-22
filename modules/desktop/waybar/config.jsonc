@@ -8,21 +8,7 @@
     "modules-right": ["cpu", "clock"],
     "hyprland/workspaces": {
       "sort-by": "id",
-
-      // "format": "{icon}{windows}",
-      // "format-window-separator": "",
-      // "window-rewrite-default": "",
-      // "window-rewrite": {
-      //   "steam": " ",
-      //   "brave": " ",
-      //   "easyeffects": " ",
-      //   "discord": " ",
-      // },
-      // "format-icons": {
-      //   "active": "󰫈",
-      //   "default": "󰋙",
-      // },
-
+      "on-click": "activate",
       "format": "{icon}",
       "format-icons": {
         "default": "󰋙",
