@@ -11,16 +11,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs: {
-    nixosConfigurations.aigis = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./system.nix
-        ./hardware.nix
-        ./user.nix
-        inputs.home-manager.nixosModules.home-manager
-        inputs.stylix.nixosModules.stylix
-      ];
+  outputs =
+    inputs@{ self, ... }:
+    {
+      nixosConfigurations.aigis = inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs self; };
+        modules = [
+          ./system.nix
+          ./hardware.nix
+          ./user.nix
+          inputs.home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
+        ];
+      };
     };
-  };
 }

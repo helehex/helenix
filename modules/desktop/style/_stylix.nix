@@ -1,9 +1,14 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  self,
+  ...
+}:
 {
   stylix = {
     enable = true;
-    base16Scheme = ./theme.yaml;
-    image = null;
+    base16Scheme = "${self}/modules/desktop/style/theme.yaml";
+    image = "${self}/modules/desktop/wallpapers/fine.png";
     polarity = "dark";
 
     cursor = {

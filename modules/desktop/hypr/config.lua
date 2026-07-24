@@ -52,7 +52,6 @@ hl.monitor({
 ---- MY PROGRAMS ----
 ---------------------
 
--- Set programs that you use
 local terminal    = "alacritty"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
@@ -74,7 +73,7 @@ end)
 
 -- Hot reloading
 hl.on("config.reloaded", function()
-    hl.exec_cmd("pkill -SIGUSR2 waybar")
+    hl.exec_cmd("pkill -SIGUSR2 waybar ; pkill hyprpaper ; hyprpaper")
 end)
 
 
