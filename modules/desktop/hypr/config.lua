@@ -2,7 +2,7 @@
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
@@ -23,7 +23,7 @@ hl.env("LIBVA_DRIVER_NAME", "nvidia")
 ---- MONITORS ----
 ------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- https://wiki.hypr.land/Configuring/Basics/Monitors/
 
 local monitors = {
     "desc:Dell Inc. Dell S2417DG #ASM6P/O8Uczd",
@@ -62,16 +62,13 @@ local menu        = "rofi -show drun"
 ---- AUTOSTART ----
 -------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Autostart/
-
-hl.workspace_rule({ workspace = "1", monitor = monitors[1], default = true })
+-- https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper & waybar")
     hl.exec_cmd("easyeffects", {
         workspace = "name:audio silent",
         monitor = monitors[2],
-        no_initial_focus = true,
     })
 end)
 
@@ -85,14 +82,13 @@ end)
 ---- WINDOW RULES ----
 ----------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
+-- https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 
 hl.window_rule({
     name = "audio",
     match = { class = ".*easyeffects" },
     workspace = "name:audio silent",
     monitor = monitors[2],
-    no_initial_focus = true,
 })
 
 hl.window_rule({
@@ -114,7 +110,6 @@ hl.window_rule({
     match = { class = "brave-browser" },
     workspace = "name:brave silent",
     monitor = monitors[2],
-    no_initial_focus = true,
 })
 
 -- start browsers in their last workspaces
@@ -126,7 +121,6 @@ if browser_workspaces_file then
             match = { class = "brave-browser", title = title },
             workspace = workspace .. " silent",
             monitor = monitors[1],
-            no_initial_focus = true,
         })
     end
     browser_workspaces_file:close()
@@ -152,23 +146,24 @@ hl.window_rule({
 ---- WORKSPACE RULES ----
 -------------------------
 
--- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+-- https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+
+hl.workspace_rule({ workspace = "1", monitor = monitors[1], default = true })
+hl.workspace_rule({ workspace = "name:audio", monitor = monitors[2], default = true })
 
 
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+-- https://wiki.hypr.land/Configuring/Basics/Binds/
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+local mainMod = "SUPER"
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("command hyprctl reload"))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + X", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
+hl.bind(mainMod .. " + X", hl.dsp.window.close())
 hl.bind(mainMod .. " + escape",
-    hl.dsp.exec_cmd(". ~/helenix/modules/desktop/hypr/graceful-shutdown.sh"))
--- hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+    hl.dsp.exec_raw(". ~/helenix/modules/desktop/hypr/save.sh ; hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F11", hl.dsp.window.fullscreen({ action = "toggle" }))
@@ -206,7 +201,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
+-- https://wiki.hypr.land/Configuring/Basics/Variables/
+
 hl.config({
     general = {
         border_size      = 2,
@@ -214,8 +210,8 @@ hl.config({
         gaps_out         = 2,
 
         col              = {
-            active_border   = { colors = { "rgba(e8b43aee)", "rgba(e8843aee)" }, angle = 60 },
-            inactive_border = "rgba(100c08aa)",
+            active_border   = { colors = { "rgba(e8b43aee)" }, angle = 60 },
+            inactive_border = "rgba(060402ff)",
         },
 
         resize_on_border = false,
@@ -231,6 +227,7 @@ hl.config({
             enabled      = true,
             range        = 4,
             render_power = 3,
+            color        = "rgba(000000aa)"
         },
     },
 
@@ -244,7 +241,7 @@ hl.config({
     },
 })
 
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 hl.curve("bounce", { type = "bezier", points = { { 0.5, 0.5 }, { 0.0, 1.1 } } })
 
@@ -254,7 +251,7 @@ hl.animation({ leaf = "windows", enabled = true, speed = 3, bezier = "bounce", s
 hl.animation({ leaf = "layers", enabled = true, speed = 3, bezier = "bounce", style = "popin 20%" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 1.5, bezier = "bounce", style = "slide" })
 
--- See https://wiki.hypr.land/Configuring/Layouts/ for more
+-- https://wiki.hypr.land/Configuring/Layouts/
 hl.config({
     master = {
         mfact = "0.2",
@@ -272,7 +269,6 @@ hl.config({
     misc = {
         disable_hyprland_logo        = true,
         disable_splash_rendering     = true,
-        vrr                          = 1,
         animate_manual_resizes       = true,
         animate_mouse_windowdragging = true,
     },
@@ -285,16 +281,9 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout           = "us",
-        kb_variant          = "",
-        kb_model            = "",
-        kb_options          = "",
-        kb_rules            = "",
-
         focus_on_close      = 1,
         follow_mouse        = 1,
         follow_mouse_shrink = 8,
-        sensitivity         = 0,
     },
 })
 

@@ -10,20 +10,21 @@
 
   programs.bash = {
     enable = true;
-    shellAliases = {
-      beep = "echo boop";
-      code = "$\{EDITOR\}";
-      helenix = "cd helenix ; code .";
-      rebuild = "sudo nixos-rebuild switch --flake ~/helenix";
-      reboot = ". ~/helenix/modules/desktop/hypr/graceful-shutdown.sh ; command reboot";
-      shutdown = ". ~/helenix/modules/desktop/hypr/graceful-shutdown.sh ; command shutdown";
-    };
   };
 
-  # TODO: move this flake into /projects, move shell aliases to home manager
   home-manager.users.helehex = {
     programs.bash = {
       enable = true;
+
+      shellAliases = {
+        code = "$\{EDITOR\}";
+        helenix = "cd helenix ; code .";
+        rebuild = "sudo nixos-rebuild switch --flake ~/helenix";
+        logout = ". ~/helenix/modules/desktop/hypr/save.sh ; hyprctl dispatch 'hl.dsp.exit()'";
+        reboot = ". ~/helenix/modules/desktop/hypr/save.sh ; systemctl reboot";
+        shutdown = ". ~/helenix/modules/desktop/hypr/save.sh ; systemctl poweroff";
+      };
+
       initExtra = ''
         p () {
           cd ~/projects/$1
