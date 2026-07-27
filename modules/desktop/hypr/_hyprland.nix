@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, self, ... }:
 {
   environment.systemPackages = with pkgs; [
     hyprshot
@@ -23,5 +23,7 @@
         "hypr/hyprland.lua".source =
           config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/helenix/modules/desktop/hypr/config.lua";
       };
+      home.file."/helenix/.luarc.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/hypr/.luarc.json";
     };
 }

@@ -20,9 +20,10 @@
         code = "$\{EDITOR\}";
         helenix = "cd helenix ; code .";
         rebuild = "sudo nixos-rebuild switch --flake ~/helenix";
-        logout = ". ~/helenix/modules/desktop/hypr/save.sh ; hyprctl dispatch 'hl.dsp.exit()'";
-        reboot = ". ~/helenix/modules/desktop/hypr/save.sh ; systemctl reboot";
-        shutdown = ". ~/helenix/modules/desktop/hypr/save.sh ; systemctl poweroff";
+        save = ". ~/helenix/modules/desktop/hypr/save.sh";
+        logout = "save -l";
+        reboot = "save -r";
+        shutdown = "save -s";
       };
 
       initExtra = ''

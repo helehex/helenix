@@ -5,7 +5,7 @@
     "position": "top",
     "height": 24,
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["cpu", "clock"],
+    "modules-right": ["disk", "memory", "cpu", "clock"],
     "hyprland/workspaces": {
       "sort-by": "id",
       "on-click": "activate",
@@ -16,7 +16,6 @@
         "steam": "",
         "brave": "",
         "audio": "",
-        "discord": "",
       },
     },
   },
