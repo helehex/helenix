@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   security.rtkit.enable = true;
   services.pipewire = {
@@ -14,4 +14,8 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    easyeffects
+  ];
 }

@@ -16,29 +16,17 @@
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
       ];
-      config.common = {
-        default = [ "gtk" ];
-        "org.freedesktop.portal.FileChooser" = "gtk";
-      };
-    };
-    xdg.mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "inode/directory" = "thunar.desktop";
-      };
     };
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  programs.nix-ld = {
-    enable = true;
-  };
-
+  programs.nix-ld.enable = true;
   programs.thunar.enable = true;
   programs.steam.enable = true;
   programs.obs-studio.enable = true;
+  services.udisks2.enable = true;
   environment.systemPackages = with pkgs; [
+    udiskie
     brave
     audacity
     blender
@@ -46,17 +34,10 @@
     inkscape
     godot
     freecad-wayland
-    easyeffects
-    prismlauncher
   ];
 
-  # services.udisks2.enable = true;
-  # home-manager.users.helehex = {
-  #   services.udiskie.enable = true;
-  # };
-
   nix.settings = {
-    # auto-optimise-store = true;
+    auto-optimise-store = true;
     experimental-features = [
       "nix-command"
       "flakes"

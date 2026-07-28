@@ -1,14 +1,15 @@
 { pkgs, self, ... }:
 {
+  programs.hyprland.enable = true;
+
   environment.systemPackages = with pkgs; [
     hyprshot
     hyprpaper
-    # hyprshutdown
   ];
 
-  programs.hyprland = {
-    enable = true;
-    # xwayland.enable = true;
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   home-manager.users.helehex =

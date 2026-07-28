@@ -1,10 +1,5 @@
 { pkgs, ... }:
 {
-  environment.variables = {
-    EDITOR = "zeditor";
-    VISUAL = "zeditor";
-  };
-
   environment.systemPackages = with pkgs; [
     gcc
     nil
@@ -17,6 +12,11 @@
   home-manager.users.helehex = {
     programs.zed-editor = {
       enable = true;
+    };
+
+    home.sessionVariables = {
+      EDITOR = "zeditor";
+      VISUAL = "zeditor";
     };
   };
 }

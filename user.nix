@@ -14,5 +14,8 @@
     home.username = "helehex";
     home.homeDirectory = "/home/helehex";
     home.stateVersion = "25.05";
+
+    programs.element-desktop.enable = true;
+    programs.prismlauncher.enable = true;
   };
 }

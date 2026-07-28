@@ -1,22 +1,3 @@
--------------------------------
----- ENVIRONMENT VARIABLES ----
--------------------------------
-
-hl.env("GDK_BACKEND", "wayland,x11,*")
-hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-hl.env("SDL_VIDEODRIVER", "wayland")
-hl.env("CLUTTER_BACKEND", "wayland")
-
-hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
-hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("XDG_SESSION_DESKTOP", "Hyprland")
-
-hl.env("GBM_BACKEND", "nvidia-drm")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
-
-
 ------------------
 ---- MONITORS ----
 ------------------
@@ -75,7 +56,7 @@ local menu        = "rofi -show drun"
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("hyprpaper & waybar")
+    hl.exec_cmd("hyprpaper & waybar & udiskie")
     hl.exec_cmd("easyeffects")
 end)
 
@@ -277,6 +258,7 @@ hl.config({
     master = {
         mfact = "0.2",
         new_status = "slave",
+        new_on_top = true,
         orientation = "bottom",
     },
 })
